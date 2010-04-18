@@ -165,7 +165,7 @@ class Users extends ST_Auth_Controller {
 					'password' 	=>	$this->input->post('password',TRUE),
 					'mail'		=>	$this->input->post('mail',TRUE),
 					'url'		=>	$this->input->post('url',TRUE),
-					'screenName'=>	($this->input->post('screenName'))?$this->input->post('screenName',TRUE):$this->input->post('name',TRUE),
+					'screenName'=>	($this->input->post('screenName'))?$this->input->post('screenName',TRUE):$this->input->post('uname',TRUE),
 					'created'	=>	time(),
 					'activated'	=>	0,
 					'logged'	=>	0,

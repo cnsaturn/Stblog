@@ -14,9 +14,26 @@ stblog第一个版本发布
 1. 修复Windows主机路径问题的bug (感谢huboo82)
 2. 修复激活编辑器插件前后分段不统一的bug
 3. 修复url中文字符过滤的问题
-3. 修复若干typo
+4. 修复若干typo
 
+-----------------------------
 
+2010/04/18 STBLOG ver 0.1.2:
 
+此版本修复几个重要BUG：
+
+1. 添加用户时用户验证的逻辑错误，users_mdl.php | controllers/admin/users.php (issue 2)
+2. 附件没有删除但显示成功删除附件的BUG (issue 3#2)
+3. 语义化时间显示出错的BUG (issue 3#6)
+4. 若干typo (issue 3#2)
+5. 汉化了Syntaxhighlighter for ckeditor代码高亮插件
+6. htmlspecialchars重复转换bug
+7. 其他若干细小bug
+
+增加：
+
+1. 后台批量审核普通用户提交的文章
+
+感谢参与测试的朋友zycbob/huboo82/flexbeer
 
 ----EOF---------------------

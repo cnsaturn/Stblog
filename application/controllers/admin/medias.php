@@ -248,9 +248,12 @@ class Medias extends ST_Auth_Controller {
 			@unlink($info['path']);
 			
 			$this->posts_mdl->remove_post($pid);
+			
+			//fix issue 3#2
+			return TRUE;
 		}
 		
-		return TRUE;
+		return FALSE;
 	}
 
 	 /**

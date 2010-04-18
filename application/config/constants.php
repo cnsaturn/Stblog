@@ -49,7 +49,7 @@ define('ST_PLUGINS_DIR', 							'st_plugins');
 define('ST_DB_CACHE_DIR', 							'dbcache');
 define('ST_NAME', 									'STBlog');
 define('ST_SALT_LENGTH', 							9);
-define('ST_VERSION', 								'0.1.1');
+define('ST_VERSION', 								'0.1.2');
 define('ST_AUTHOR', 								'Saturn');
 define('ST_AUTHOR_URL', 							'http://www.cnsaturn.com/');
 define('ST_CONTENT_BREAK', 							'[--break--]');

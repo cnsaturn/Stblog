@@ -46,6 +46,9 @@ $this->load->view('admin/menu');
                         <span class="operate-button typecho-table-select-none">不选</span>&nbsp;&nbsp;&nbsp;
                         选中项: 
                         <span rel="delete" lang="你确认要删除这些文章吗" class="operate-button operate-delete typecho-table-select-submit">删除</span>
+                        <?php if($this->auth->exceed('editor', true) && 'waiting' == $status): ?>
+                        <span rel="approved" class="operate-button typecho-table-select-submit">通过审核</span>
+                        <?php endif;?>
                     </p>
                     <p class="search">
                     <input type="text" value="请输入关键字" onclick="value='';name='keywords';" />
@@ -65,7 +68,7 @@ $this->load->view('admin/menu');
                 </form>
                 </div>
             
-                <form method="post" name="manage_posts" class="operate-form" action="<?php echo site_url('admin/posts/remove')?>">
+                <form method="post" name="manage_posts" class="operate-form" action="<?php echo site_url('admin/posts/operate')?>">
                 <table class="typecho-list-table">
                     <colgroup>
                         <col width="25"/>

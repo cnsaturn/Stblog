@@ -586,14 +586,82 @@ class Posts extends ST_Auth_Controller {
 			is_numeric($pid)?$this->_edit($pid):show_error('禁止访问：危险操作');
 		}
 	}
+	
+	/**
+     * 批量操作文章
+     *
+     * @access private
+     * @return void
+     */
+	public function operate()
+	{
+		/** 尝试get获取数据 */
+		$action = $this->input->post('do',TRUE);
+		
+		switch($action)
+		{
+			case 'delete':
+				$this->_remove();
+				break;
+			case 'approved':
+				$this->_approved();
+				break;
+			default:
+				show_404();
+				break;
+		}
+	}
+	
+	/**
+     * 批量审核文章
+     *
+     * @access private
+     * @return void
+     */
+	private function _approved()
+	{
+		$posts = $this->input->post('pid',TRUE);
+		$approved = 0;
+		
+		if($posts && is_array($posts))
+		{
+			foreach($posts as $post)
+			{
+				if(empty($post))
+				{
+					continue;
+				}
+				
+				$content = $this->posts_mdl->get_post_by_id('pid', $post);
+				
+				if($content && $this->auth->exceed('editor', TRUE))
+				{
+					if($this->posts_mdl->update_post($post, array('status' => 'publish')))
+					{
+						$approved++;	
+					}
+				}
+				
+				$content = NULL;
+			}
+		
+		}
+		
+		($approved > 0)
+					?$this->session->set_flashdata('success', '成功审核文章')
+					:$this->session->set_flashdata('error', '没有文章被审核');
+		
+		go_back();
+		
+	}
 
 	/**
      * 批量删除文章
      *
-     * @access public
+     * @access private
      * @return void
      */
-	public function remove()
+	private function _remove()
 	{
 		$posts = $this->input->post('pid',TRUE);
 		$deleted = 0;

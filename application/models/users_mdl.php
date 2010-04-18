@@ -151,7 +151,8 @@ class Users_mdl extends Model {
 	{
 		if(in_array($key, $this->_unique_key) && !empty($value))
 		{
-			$this->db->select('uid')->from(self::TBL_USERS)->where($key, intval($value));
+			//fix issue 2
+			$this->db->select('uid')->from(self::TBL_USERS)->where($key, $value);
 			
 			if(!empty($exclude_uid) && is_numeric($exclude_uid))
 			{

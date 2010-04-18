@@ -18,7 +18,7 @@ $this->load->view('admin/menu');
                     <div class="column-18">
                         <label for="title" class="typecho-label">标题</label>
 						<?php echo form_error('title', '<p class="message error">', '</p>'); ?>
-                        <p class="title"><input type="text" id="title" name="title" value="<?php echo set_value('title',(isset($title))?$title:''); ?>" class="text title" /></p>
+                        <p class="title"><input type="text" id="title" name="title" value="<?php echo set_value('title',(isset($title))?htmlspecialchars_decode($title):''); ?>" class="text title" /></p>
                         <label for="text" class="typecho-label">内容
                         <!-- 使用wysiwyg编辑器时必需实现此方法 -->
                         <?php $this->plugin->trigger(ST_CORE_HOOK_EDITOR_INSERT_MORE);?>
@@ -98,7 +98,7 @@ $this->load->view('admin/menu');
                         <li>
                             <label for="slug" class="typecho-label">缩略名</label>
 							<?php echo form_error('slug', '<p class="message error">', '</p>'); ?>
-                            <p><input type="text" id="slug" name="slug" value="<?php echo set_value('slug',(isset($slug))?$slug:''); ?>" class="mini" /></p>
+                            <p><input type="text" id="slug" name="slug" value="<?php echo set_value('slug',(isset($slug))?htmlspecialchars_decode($slug):''); ?>" class="mini" /></p>
                             <p class="description">为这篇日志自定义链接地址, 有利于搜索引擎收录</p>
                         </li>
                       </ul>

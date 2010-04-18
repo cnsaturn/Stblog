@@ -459,50 +459,63 @@ class Common
 	*/
 	public static function dateWord($from, $now)
 	{
-		$between = $now - $from;
-	     
-	     /** 如果是一天 */
-		if ($between < 86400 && idate('d', $from) == idate('d', $now)) 
-		{
-		 /** 如果是一小时 */
-			if ($between < 3600 && idate('H', $from) == idate('H', $now)) 
-			{
-				/** 如果是一分钟 */
-				if ($between < 60 && idate('i', $from) == idate('i', $now)) 
-				{
-					$second = idate('s', $now) - idate('s', $from);
-					return sprintf('%d秒前',$second);
-				}
-	                
-	            $min = idate('i', $now) - idate('i', $from);
-	            return sprintf('%d分钟前', $min);
-	        }
-	            
-			$hour = idate('H', $now) - idate('H', $from);
-			return sprintf( '%d小时前',$hour);
-		}
-	    
-	    /** 如果是昨天 */
-		if ($between < 172800 && (idate('z', $from) + 1 == idate('z', $now) || idate('z', $from) > 2 + idate('z', $now))) 
-		{
-				return sprintf('昨天 %s', date('H:i', $from));
-		}   
+		//fix issue 3#6 by saturn, solution by zycbob
 		
-		/** 如果是一个星期 */
-		if ($between < 604800 && idate('W', $from) == idate('W', $now)) 
-		{
-	            $day = intval($between / (3600 * 24));
-	            return sprintf('%d天前', $day);
-	    }
-	    
-	    /** 如果是一年内 */
-	    if ($between < 31622400 && idate('Y', $from) == idate('Y', $now)) 
-		{
-	            return date('n月j日', $from);
-	    }
+		/** 如果不是同一年 */
+        if (idate('Y', $now) != idate('Y', $from)) 
+        {
+            return date('Y年m月d日', $from);
+        }
 		
-		/**其他**/
-	    return date('Y年m月d日', $from);
+		/** 以下操作同一年的日期 */
+		$seconds = $now - $from;
+        $days = idate('z', $now) - idate('z', $from);
+        
+        /** 如果是同一天 */
+        if ($days == 0) 
+        {
+        	/** 如果是一小时内 */
+            if ($seconds < 3600) 
+            {
+            	/** 如果是一分钟内 */
+                if ($seconds < 60)
+                {
+                    if (3 > $seconds) 
+                    {
+                        return '刚刚';
+                    } 
+                    else 
+                    {
+                        return sprintf('%d秒前', $seconds);
+                    }
+                }
+
+                return sprintf('%d分钟前', intval($seconds / 60));
+            }
+
+            return sprintf('%d小时前', idate('H', $now) - idate('H', $from));
+        }
+
+		/** 如果是昨天 */
+        if ($days == 1) 
+        {
+            return sprintf('昨天 %s', date('H:i', $from));
+        }
+        
+        /** 如果是前天 */
+        if ($days == 2) 
+        {
+        	return sprintf('前天 %s', date('H:i', $from));
+        }
+
+        /** 如果是7天内 */
+        if ($days < 7) 
+        {
+            return sprintf('%d天前', $days);
+        }
+
+        /** 超过一周 */
+        return date('n月j日', $from);
 	}
 	
 	/**

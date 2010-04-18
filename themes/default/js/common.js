@@ -6,9 +6,9 @@ function ReImgSize()
 		//IE
 		if(document.all)
 		{
-			if (document.images[i].width>600)
+			if (document.images[i].width>550)
 			 {
-			   document.images[i].width="600"
+			   document.images[i].width="550"
 			   try
 			   {
 			       document.images[i].outerHTML='<a href="'+document.images[i].src+'" target="_blank" title="在新窗口打开图片">'+document.images[i].outerHTML+'</a>'
@@ -19,9 +19,9 @@ function ReImgSize()
 		//safari && opera && firefox
 		else
 		{
-			if (document.images[i].width>600) 
+			if (document.images[i].width>550) 
 			{
-			  document.images[i].width="600"
+			  document.images[i].width="500"
 			  document.images[i].title="在新窗口打开图片"
 			  document.images[i].style.cursor="pointer"
 			  document.images[i].onclick=function(e){window.open(this.src)}

@@ -246,8 +246,8 @@ class Home extends ST_Controller
 		/** 分页参数 */
 		$this->_init_pagination($page);
 		
-		$this->_posts = $this->posts_mdl->get_posts('post', 'published', NULL, $this->_limit, $this->_offset)->result();
-		$this->_total_count = $this->posts_mdl->get_posts('post', 'published', NULL, 10000, 0)->num_rows();
+		$this->_posts = $this->posts_mdl->get_posts('post', 'publish', NULL, $this->_limit, $this->_offset)->result();
+		$this->_total_count = $this->posts_mdl->get_posts('post', 'publish', NULL, 10000, 0)->num_rows();
 		
 		if(!empty($this->_posts))
 		{
