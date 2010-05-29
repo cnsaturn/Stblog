@@ -152,7 +152,7 @@ class Themes extends ST_Auth_Controller {
     {
     	$theme = $this->input->post('theme',TRUE);
     	$file = $this->input->post('file',TRUE);
-    	$content = htmlspecialchars_decode($this->input->post('content',TRUE));
+    	$content = htmlspecialchars_decode($this->input->post('content'));
     	
     	$path = FCPATH . ST_THEMES_DIR . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR  . $file;
     	
