@@ -58,7 +58,7 @@ class AutoClean
 	{
 		$path = $this->_CI->config->item('cache_path');
 		
-		$filecount = count(glob($path . '*'));
+		$filecount = count(glob($path . '*', GLOB_NOSORT));
 		
 		if($filecount > $this->_cache_file_limit)
 		{
