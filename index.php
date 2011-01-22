@@ -1,5 +1,17 @@
 <?php
-
+/**
+ *	Stblog 
+ *
+ *	Stblog is an open source blogging system built on the 
+ *	well-known PHP framework Codeigniter.
+ *
+ *	@package	Stblog
+ *	@author		cnsaturn <yangg.hu@gmail.com>
+ *	@copyright	Copyright (c) 2009 - 2010, cnsaturn.com.
+ *	@license	GNU General Public License 2.0
+ *	@link		https://github.com/stblog
+ *	@version	1.0
+ */
 /*
  *---------------------------------------------------------------
  * PHP ERROR REPORTING LEVEL
@@ -11,6 +23,26 @@
  *
  */
 	error_reporting(E_ALL);
+	// Set it to 0 if this app is in production
+	ini_set('display_errors', 1);
+
+
+/*
+|---------------------------------------------------------------
+| 启动程序时动态修改PHP.ini的部分设置
+|---------------------------------------------------------------
+|
+| 很多虚拟主机屏蔽或疏忽了一些PHP非常核心的功能，比如时区设置。以下设置可提高
+| 程序的兼容性和稳定性，并避免上述问题的发生。
+|
+*/
+	set_include_path(dirname(__FILE__)); // For windows servers
+	@ini_set('cgi.fix_pathinfo', 0); // For Nginx web server
+	// Be 100% sure the timezone is set
+	if (ini_get("date.timezone") === "" && function_exists("date_default_timezone_set")) {
+		 date_default_timezone_set("UTC");
+	}
+
 
 /*
  *---------------------------------------------------------------
