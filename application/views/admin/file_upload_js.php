@@ -16,13 +16,12 @@
         new Request.JSON({
             method : 'post',
             url : '<?php echo site_url('admin/medias/operate');?>',//remove attachment
-            onComplete : function (result) {
-                if (200 == result.code) {
-                    $(el).getParent('li').destroy();
-                } else {
-                    _title.removeClass('delete');
-                    alert('删除失败');
-                }
+            onSuccess : function () {
+                $(el).getParent('li').destroy();
+            },
+            onFailure : function(){
+                _title.removeClass('delete');
+                alert('删除失败');
             }
         }).send('do=delete&from=ajax&pid=' + pid);
     };
